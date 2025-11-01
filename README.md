@@ -74,4 +74,54 @@
 **WHERE** month = 12 **AND** is_client = 1 
 
 
+## Определите, сколько уникальных стран представлено среди клиентов
 
+SELECT COUNT (DISTINCT Country) FROM Customer
+
+
+## Определите количество клиентов, которые проживают в Бразилии.
+
+SELECT COUNT(*)
+FROM Customer Where Country = 'Brazil'
+
+
+## Посчитайте среднюю цену и общее количество товаров в категории с идентификатором 5.
+
+SELECT AVG(Price), COUNT(*) AS total_products
+FROM Products
+WHERE CategoryID = 5
+
+
+## Вычислите средний возраст сотрудников на дату 2024-01-01.
+
+SELECT 
+    AVG((julianday('2025-01-01') - julianday(BirthDate)) / 365.25) AS AverageAge
+FROM Employee;
+
+--julianday - это дни с момента начала юлианского периода (24 ноября 4714 до н.э.)
+
+
+## Найдите заказы, сделанные в период с 16 января по 15 февраля 2024 года, и отсортируйте их по дате заказа.
+
+select OrderID, OrderDate from Orders
+where OrderDate between '2024-01-16' and '2024-02-15'
+order by OrderDate
+
+
+## Определите количество заказов, сделанных в ноябре 2023 года, используя начальную и конечную дату месяца.
+
+select count(OrderDate) from Orders
+where OrderDate between '2023-11-01' and '2023-11-30'
+
+
+## Найдите количество заказов за январь 2024 года, используя оператор LIKE для фильтрации даты
+
+
+select count(OrderDate) from Orders
+where OrderDate LIKE '2024-01-%'
+
+
+## Определите количество заказов за 2024 года, используя функцию STRFTIME для извлечения года.
+
+select count(OrderDate) from Orders
+where strftime('%Y', OrderDate) = '2024'
