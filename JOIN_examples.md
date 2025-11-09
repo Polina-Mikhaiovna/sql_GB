@@ -112,3 +112,72 @@ LIMIT 10
 17	Alice Mutton	        331
 62	Tarte au sucre	        325
 33	Geitost	                316
+
+
+## Задание 4: Анализ прибыли по категориям продуктов
+
+
+SELECT c.CategoryName, SUM(od.Quantity) * p.Price AS revenue_at_calegory
+FROM Products p
+JOIN OrderDetails od ON p.ProductID = od.ProductID
+JOIN Categories c ON p.CategoryID = c.CategoryID
+GROUP BY c.CategoryName
+ORDER BY revenue_at_calegory DESC
+
+
+Meat/Poultry	124936.0
+Dairy Products	54621.0
+Seafood	        44795.0
+Beverages   	41202.0
+Confections	    36819.5
+Produce	        21450.0
+Grains/Cereals	19152.0
+Condiments	    13830.0
+
+
+## Задание 5: Количество заказов по регионам
+Задание:
+Определите количество заказов, размещенных клиентами из различных стран, за
+каждый месяц.
+
+
+SELECT STRFTIME("%m/%Y", o.OrderDate) AS Month, c.Country, COUNT(o.OrderID) AS Order_count from Customers c 
+JOIN Orders o ON c.CustomerID = o.CustomerID 
+GROUP BY c.Country, "Month"
+ORDER BY "Month"
+
+
+## Задание 6: SQL-запрос для создания отчета, показывающего потенциальный интерес к каждому продукту в разных странах.
+Используем CROSS JOIN операцию для создания комбинаций стран и продуктов.
+Столбец PotentialInterest должен представлять собой гипотетическую оценку, основанную на общем
+количестве клиентов из этой страны, которые могут быть заинтересованы в конкретном продукте.
+CROSS JOIN создаёт все возможные комбинации стран и названий продуктов.
+
+
+SELECT
+c.Country,
+p.ProductName,
+p.Price,
+COUNT(DISTINCT c.CustomerID) AS PotentialInterestScore
+FROM Customers c
+CROSS JOIN Products p
+GROUP BY c.Country, p.ProductName, p.Price;
+ORDER BY PotentialInterestScore
+
+
+## Задаие 7: SQL-запрос для определения поставщиков, предлагающих широкий ассортимент продукции в разных категориях.
+
+
+SELECT
+s.SupplierID,
+s.SupplierName,
+s.Country,
+COUNT(DISTINCT p.CategoryID) AS ProductCategoryDiversity
+FROM Suppliers s
+JOIN Products p ON s.SupplierID = p.SupplierID
+GROUP BY s.SupplierID, s.SupplierName, s.Country
+ORDER BY ProductCategoryDiversity DESC
+
+
+
+
