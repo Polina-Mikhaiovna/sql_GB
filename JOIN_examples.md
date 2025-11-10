@@ -217,14 +217,15 @@ SELECT Country, COUNT(DISTINCT CustomerID) FROM customers_without_orders
 GROUP BY Country 
 ```
 
-Argentina	|2
-Belgium |	1
-Canada	   | 1
-France	  |  4
-Germany	 |   2
-Spain	|    1
-UK	|        1
-USA| 5
+
+|Argentina	|2|
+|Belgium |	1|
+|Canada	   | 1|
+|France	  |  4|
+|Germany	 |   2|
+|Spain	|    1|
+|UK	|        1|
+|USA| 5|
 
 
 
