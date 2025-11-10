@@ -8,11 +8,15 @@
 для каждой категории продуктов.
 
 Выведите результаты, включая:
+
 ● CategoryID
+
 ● Общее количество заказов (total_quantity)
+
 ● Общий доход (total_revenue)
 
 Отсортируйте результаты по убыванию общего дохода (total_revenue).
+
 Используйте таблицы Products, OrderDetails и Categories
 
 ```
@@ -32,13 +36,14 @@ ORDER BY
 	total_revenue DESC
 ```
 
-4	Dairy Products	100	2601	54621.0
-8	Seafood     	67	1445	44795.0
-1	Beverages   	93	2289	41202.0
-3	Confections	    84	2110	36819.5
-7	Produce	        33  715	    21450.0
-5	Grains/Cereals	42	912	    19152.0
-2	Condiments  	49	1383	13830.0*
+|---|---|----|----|----|
+|4|Dairy Products|100|2601|54621.0|
+|8|	Seafood     	|67|	1445	|44795.0|
+|1|	Beverages   	|93	|2289	|41202.0|
+|3|	Confections	    |84	|2110	|36819.5|
+|7|	Produce	        |33  |715	    |21450.0|
+|5|	Grains/Cereals	|42|	912	    |19152.0|
+|2|	Condiments  	|49	1383	13830.0*
 
 ## Задание №2: Анализ частоты заказа продуктов по категориям
 
@@ -217,8 +222,8 @@ SELECT Country, COUNT(DISTINCT CustomerID) FROM customers_without_orders
 GROUP BY Country 
 ```
 
-
-|Argentina	|2|
+|----|----|
+|Argentin	|2|
 |Belgium |	1|
 |Canada	   | 1|
 |France	  |  4|
