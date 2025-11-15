@@ -36,14 +36,16 @@ ORDER BY
 	total_revenue DESC
 ```
 
-|---|---|----|----|----|
-|4|Dairy Products|100|2601|54621.0|
-|8|	Seafood     	|67|	1445	|44795.0|
-|1|	Beverages   	|93	|2289	|41202.0|
-|3|	Confections	    |84	|2110	|36819.5|
-|7|	Produce	        |33  |715	    |21450.0|
-|5|	Grains/Cereals	|42|	912	    |19152.0|
-|2|	Condiments  	|49	1383	13830.0*
+```
+6	Meat/Poultry	50	1288	124936.0
+4	Dairy Products	100	2601	54621.0
+8	Seafood	67	1445	44795.0
+1	Beverages	93	2289	41202.0
+3	Confections	84	2110	36819.5
+7	Produce	33	715	21450.0
+5	Grains/Cereals	42	912	19152.0
+2	Condiments	49	1383	13830.0
+```
 
 ## Задание №2: Анализ частоты заказа продуктов по категориям
 
@@ -52,10 +54,12 @@ ORDER BY
 категории продуктов. Выведите результаты, включая:
 
 ● CategoryID
+
 ● Количество уникальных заказов (order_count)
 
-Отсортируйте результаты по убыванию количества уникальных заказов
-(order_count). Используйте таблицы Products, OrderDetails и Categories.
+Отсортируйте результаты по убыванию количества уникальных заказов (order_count).
+
+Используйте таблицы Products, OrderDetails и Categories.
 
 ```
 SELECT
@@ -71,13 +75,16 @@ ORDER BY
 	order_count DESC
 ```
 
+
+```
 1	Beverages	    84255	93
 3	Confections	    78400	84
 8	Seafood	        53184	67
-6	Meat/Poultry	52192	50
+6	Meat/Poultry		52192	50
 2	Condiments	    56120	49
 5	Grains/Cereals	45249	42
-7	Produce	        29672	33*
+7	Produce	        29672	33
+```
 
 ## Задание №3: Вывод наиболее популярных продуктов по количеству заказов
 
@@ -86,6 +93,7 @@ ORDER BY
 (Quantity) для каждого продукта. Выведите результаты, включая:
 
 ● ProductName
+
 ● Общее количество заказов (total_quantity)
 
 Отсортируйте результаты по убыванию общего количества заказов (total_quantity).
@@ -106,6 +114,7 @@ ORDER BY
 LIMIT 10
 ```
 
+```
 31	Gorgonzola Telino	    458
 60	Camembert Pierrot	    430
 35	Steeleye Stout	        369
@@ -116,7 +125,7 @@ LIMIT 10
 17	Alice Mutton	        331
 62	Tarte au sucre	        325
 33	Geitost	                316
-
+```
 ## Задание 4: Анализ прибыли по категориям продуктов
 
 ```
@@ -128,6 +137,7 @@ GROUP BY c.CategoryName
 ORDER BY revenue_at_calegory DESC
 ```
 
+```
 Meat/Poultry	124936.0
 Dairy Products	54621.0
 Seafood	        44795.0
@@ -136,14 +146,15 @@ Confections	    36819.5
 Produce	        21450.0
 Grains/Cereals	19152.0
 Condiments	    13830.0
-
+```
 ## Задание 5: Количество заказов по регионам
 
 Определите количество заказов, размещенных клиентами из различных стран, за
 каждый месяц.
 
 ```
-SELECT STRFTIME("%m/%Y", o.OrderDate) AS Month, c.Country, COUNT(o.OrderID) AS Order_count from Customers c 
+SELECT STRFTIME("%m/%Y", o.OrderDate) AS Month, c.Country, COUNT(o.OrderID) AS Order_count 
+FROM Customers c 
 JOIN Orders o ON c.CustomerID = o.CustomerID 
 GROUP BY c.Country, "Month"
 ORDER BY "Month"
@@ -196,9 +207,9 @@ ORDER BY ProductCategoryDiversity DESC
 SELECT COUNT(distinct c.CustomerID), COUNT(distinct o.CustomerID) from Orders o 
 FULL JOIN Customers c ON c.CustomerID = c.CustomerID 
 ```
-91 74
 
-```
+```91 74```
+
 --какие именно клиенты не совершали заказы, с помощью EXCEPT убираем пересекающиеся данные
 
 --(т.е. тех клиентов что попали в Orders)
@@ -221,16 +232,15 @@ with customers_without_orders AS (
 SELECT Country, COUNT(DISTINCT CustomerID) FROM customers_without_orders
 GROUP BY Country 
 ```
-
-|----|----|
-|Argentin	|2|
-|Belgium |	1|
-|Canada	   | 1|
-|France	  |  4|
-|Germany	 |   2|
-|Spain	|    1|
-|UK	|        1|
-|USA| 5|
-
+```
+Argentina	2
+Belgium		1
+Canada		1
+France		4
+Germany		2
+Spain		1
+UK		1
+USA		5
+```
 
 
