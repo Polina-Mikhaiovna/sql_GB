@@ -50,3 +50,16 @@ SELECT * from avg_prise_in_category
 WHERE count > 3
 GROUP BY CategoryID
 ```
+
+
+## Рассчитайте процент от общего объема (выручки) продаж каждого продукта в своей категории
+
+```
+select p.CategoryID, od.ProductID, p.ProductName,
+sum(quantity), p.Price , sum(Quantity*p.Price) AS profit_of_product,
+sum(Quantity*p.Price) / sum(sum(Quantity*p.Price)) over (partition by CategoryID) *100 AS percentage_of_sales
+from OrderDetails od 
+JOIN Products p ON p.ProductID = od.ProductID
+GROUP by p.CategoryID ,p.ProductID
+```
+
